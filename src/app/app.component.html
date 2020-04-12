@@ -1,0 +1,28 @@
+﻿<!-- nav-->
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="/">Noticias</a>
+        <a class="nav-item nav-link" routerLink="/history">Articulos</a>
+        <a class="nav-item nav-link" routerLink="/history">Contenidos</a>
+    </div>
+</nav>
+
+<!-- main app container-->
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 offset-sm-0">
+                <alert></alert>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- credits-->
+<div class="text-center">
+    <p>
+        <a href="https://web-cms.cds.net.co" target="_parent">Modulo de contenidos</a>
+    </p>
+</div>
+

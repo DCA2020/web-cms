@@ -1,0 +1,16 @@
+{
+    "principal": {
+        "bienvenida": "System Manager Content!",
+        "titulo": "CMS",
+        "noticias": {
+            "titulo_panel": "Noticias"
+        },
+        "articulos": {
+            "titulo_panel": "Articulos"
+        },
+        "contenidosHTML": {
+            "titulo_panel": "Contenidos HMTL"
+        }
+    }
+}
+
