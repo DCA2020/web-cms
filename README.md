@@ -1,13 +1,13 @@
 # CMS
-Sistema en linea para asignación inteligente de partidas deportivas. <br>
-_qj.cds.net.co_
+System Content Manager. <br>
+_web-cms.cds.net.co_
 ============
 
-Aplicación web Front - NodeJS-Express-Angular-Boostrap
+Aplicación web Front - NodeJS - Express-Angular 8 - Boostrap
 
 # CMS
 
-_App para ejecución de recursos y funcionalidades de juegos deportivos reales a traves de asginaciones en linea_
+_App para administración de contenidos_
 
 ## Comenzando 🚀
 
