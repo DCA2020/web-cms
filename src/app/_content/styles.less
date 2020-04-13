@@ -2,9 +2,14 @@
 /* LESS */
 @media screen {
     @media (min-width: 300px) {
+        /*.row {
+            width: 100%;
+        }*/
+
         .jumbotron {
-            margin: 20px 20px;
+            margin: 5% 5%;
             background-color: aliceblue;
+            width: 95%;
         }
 
         .btn-xs {
@@ -51,6 +56,7 @@
 
         .form-group {
             margin-top: -10px;
+            margin-bottom: -10px;
             margin: 0px;
             padding: 0px;
         }
@@ -61,8 +67,9 @@
     }
     @media (min-width: 370px) {
         .jumbotron {
-            margin: 20px 20px;
+            margin: 10px 10px;
             background-color: aliceblue;
+            //width: 100%;
         }
 
         #logo {
@@ -92,14 +99,18 @@
         }
 
         .form-control {
-            width: 90%;
+            width: 100%;
         }
+
+        /*.row {
+            padding: 0px auto;
+        }*/
     }
     @media (min-width: 1023px) {
         .jumbotron {
             margin: 10px auto !important;
             background-color: aliceblue;
-            width: 700px;
+            width: 100%;
         }
 
         #logo {
@@ -126,7 +137,7 @@
         }
 
         .container {
-            width: 700px;
+            width: 100%;
             color: dimgray;
         }
 
@@ -147,8 +158,9 @@ footer {
     color: white;
 }
 
-.loginForm {
-    width: 90%;
+.noticeForm {
+    width: 100%;
+    /*margin: 0px auto;*/
 }
 
 @desktop: ~"only screen and (min-width: 960px) and (max-width: 1199px)";
@@ -214,3 +226,99 @@ h2 {
     color: dimgray;
 }
 
+//#region FLEX BOX
+
+.child-1 {
+    background-color: orange;
+}
+
+.child-2 {
+    background-color: yellow;
+}
+
+.child-3 {
+    background-color: green;
+}
+
+//#endregion
+
+
+/*
+ * Define the widths: play around with these to get a best fit.
+ */
+@text-width: 180px;
+@num-width: 80px;
+
+// Main container: initialize the flex, direction is row
+.table-row {
+    display: flex;           display: -webkit-flex;
+    flex-direction: row;     -webkit-flex-direction: row;
+    flex-grow: 0;            -webkit-flex-grow: 0;
+    width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+// Wrappers around cells and other wrappers: flex, row, wrap
+.wrapper {
+    display: flex;           display: -webkit-flex;
+    flex-direction: row;     -webkit-flex-direction: row;
+    flex-grow: 0;            -webkit-flex-grow: 0;
+    flex-wrap: wrap;         -webkit-flex-wrap: wrap;
+}
+
+// Text based cells and wrappers: grow equally when there is extra space.
+.text-4, .text-2, .text {
+    flex-grow: 1;           -webkit-flex-grow: 1;
+}
+
+// Text based cells: truncate and show ellipsis when there is not enough space
+.text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding-right: 20px;
+}
+
+// Fix the minimum width of the leaf level cells
+.text {
+    width: @text-width;
+}
+
+.num {
+    width: @num-width;
+}
+
+/*
+ * General good-look styles, not mandatory.
+ */
+body {
+    font-size: 20px;
+}
+
+.table-row {
+    border-bottom: 2px solid #e0e0e0;
+    border-collapse: collapse;
+    padding-top: 5px;
+}
+
+.table-row.header {
+    background-color: #FFEEDB;
+    font-weight: bold;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+/* Some borders to show the behaviour. Uncomment to see it in action */
+/*
+.text-2, .num-2 {
+  border: 1px solid green;
+  padding: 2px;
+  margin: 2px;
+}
+
+.text-4, .num-4 {
+  border: 1px solid red;
+  margin: 2px;
+}
+*/

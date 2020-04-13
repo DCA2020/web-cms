@@ -1,91 +1,152 @@
-<div id='content' class='box-form' style="margin: 0 auto; padding:0px">
-    <form (ngSubmit)="onSubmit()" #rteForm="ngForm">
-        <div class="form-group">
-            <ejs-richtexteditor #fromRTE #name='ngModel' [(value)]='value' required name="name" [(ngModel)]="value"
-                                (created)="rteCreated()"></ejs-richtexteditor>
-            <div *ngIf="(name.invalid && name.touched)" class="alert alert-danger">
-                <div *ngIf="name.errors.required">
-                    Value is required.
-                </div>
-            </div>
-        </div>
-        <div id="btn-container">
-            <button type="submit" class="btn btn-primary" ejs-button [disabled]="!rteForm.valid">
-                <!--<span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>-->
-                <em class="fa fa-calendar-o"></em> Publicar</button>
-            <button type="reset" class="btn btn-default" ejs-button style="margin-left: 20px">
-                <em class="fa fa-sign-out"></em> Cancelar</button>
-        </div>
-    </form>
-</div>
 <style>
     .alert-danger {
-        color: #a94442;
+        color: #de3231;
         background-color: #f2dede;
         border-color: #ebccd1;
     }
-
-    #btn-container {
-        margin-top: 10px;
-    }
 </style>
-
-<div class="container">
-    <div [hidden]="submitted">
-        <h1>Hero Form</h1>
-        <form (ngSubmit)="onSubmit()" #heroForm="ngForm">
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control" id="name"
-                       required
-                       [(ngModel)]="model.name" name="name"
-                       #name="ngModel">
-                <div [hidden]="name.valid || name.pristine"
-                     class="alert alert-danger">
-                    Name is required
+<div *ngIf="loadingFull" style="text-align: center;">
+    <img src="../../../../assets/images/loading.gif" width="124" height="124"/><br>
+    Cargando ...
+</div>
+<div *ngIf="!loadingFull">
+    <button class="btn btn-primary" style="float:right;" (click)="nuevaNoticia()">
+        <em class="fa fa-plus"></em>
+        <span fxShow.sm="true" fxShow.gt-md="true" fxShow="false"> Nueva Noticia</span>
+    </button>
+    <h1>{{'principal.noticias.titulo_panel' | translate}}</h1>
+    <div class="container" *ngIf="!creandoNuevo">
+        <div class="container-fluid" style="margin-top: 10px">
+            <div class="table-row wrapper header" fxShow.sm="true" fxShow.gt-md="true" fxShow="false">
+                <div class="wrapper text-4">
+                    <div class="wrapper text-2">
+                        <div class="text">Titulo</div>
+                        <div class="text">Resumen</div>
+                        <div class="text">Eliminar</div>
+                        <div class="text">Editar</div>
+                    </div>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label for="alterEgo">Alter Ego</label>
-                <input type="text" class="form-control" id="alterEgo"
-                       [(ngModel)]="model.alterEgo" name="alterEgo">
-            </div>
-
-            <div class="form-group">
-                <label for="power">Hero Power</label>
-                <select class="form-control" id="power"
-                        required
-                        [(ngModel)]="model.power" name="power"
-                        #power="ngModel">
-                    <option *ngFor="let pow of powers" [value]="pow">{{pow}}</option>
-                </select>
-                <div [hidden]="power.valid || power.pristine" class="alert alert-danger">
-                    Power is required
+            <div class="table-row wrapper" *ngFor="let noticia of noticias">
+                <div class="wrapper text-4">
+                    <div class="wrapper text-2">
+                        <div class="text">
+                            <span fxShow.sm="false" fxShow.gt-md="false" fxShow="true">Titulo: </span>{{noticia.titulo}}</div>
+                        <div class="text" title="{{noticia.resumen}}">
+                            <span fxShow.sm="false" fxShow.gt-md="false" fxShow="true">Resumen: </span>{{noticia.resumen}}</div>
+                        <div class="text">
+                            <a (click)="open(mymodal, noticia)" class="btn btn-danger text-white" ><em class="fa fa-remove"></em>
+                            <span> Eliminar</span></a>
+                        </div>
+                        <div class="text">
+                            <a (click)="prepararEdicion(noticia)" class="btn btn-success text-white" ><em class="fa fa-edit"></em>
+                            <span> Editar</span></a>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-            <button type="submit" class="btn btn-success" [disabled]="!heroForm.form.valid">Submit</button>
-            <button type="button" class="btn btn-default" (click)="newHero(); heroForm.reset()">New Hero</button>
-        </form>
+        </div>
+        <ng-template #mymodal let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title" style="color: #0d3349 !important;">Eliminando ...</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+            <div class="modal-body" style="color: #0d3349 !important;">
+                Esta seguro de eliminar esta noticia?
+            </div>
+            <div class="modal-footer">
+                <button (click)="modal.close('Save click')" class="btn btn-outline-primary mr-2">
+                    <div>Ok</div>
+                    <!--<div class="text-dark" aria-hidden="true"><small>&times; button will be focused</small></div>-->
+                </button>
+                <button type="button" class="btn btn-outline-dark" (click)="modal.close('Cancel Save')">Cancelar
+                </button>
+            </div>
+        </ng-template>
     </div>
+    <div class="container" *ngIf="creandoNuevo">
+        <div [hidden]="submitted">
+            <form (ngSubmit)="onSubmit()" #noticeForm="ngForm" id="noticeForm">
+                <div class="flex-container" fxLayout="column">
+                    <div class="card-text">
+                        <div class="form-group">
+                            <label for="titulo">Titulo</label>
+                            <input type="text" class="form-control" id="titulo" required [(ngModel)]="model.titulo"
+                                   name="titulo" #titulo="ngModel">
+                            <div [hidden]="titulo.valid || titulo.pristine" class="alert alert-danger">
+                                El titulo es requerido
+                            </div>
+                        </div>
 
-    <div [hidden]="!submitted">
-        <h2>You submitted the following:</h2>
-        <div class="row">
-            <div class="col-xs-3">Name</div>
-            <div class="col-xs-9">{{ model.name }}</div>
+                        <div class="form-group">
+                            <label for="resumen">Resumen</label>
+                            <textarea type="textarea" class="form-control" id="resumen" [(ngModel)]="model.resumen"
+                                      name="resumen"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="categoria">Categoria</label>
+                            <select class="form-control" id="categoria" required [(ngModel)]="model.categoriaNoticia"
+                                    name="categoria" #categoria="ngModel">
+                                <option *ngFor="let categoria of categorias" [value]="categoria">{{categoria.categoria}}</option>
+                            </select>
+                            <div [hidden]="categoria.valid || categoria.pristine" class="alert alert-danger">
+                                La categoria es requerida.
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="descripcion">Contenido HTML</label>
+                            <ejs-richtexteditor id="descripcion" #fromRTE #descripcion='ngModel' [(value)]='value'
+                                                required
+                                                name="descripcion" [(ngModel)]="value"
+                                                (created)="rteCreated()"></ejs-richtexteditor>
+                            <div *ngIf="(descripcion.invalid && descripcion.touched)" class="alert alert-danger">
+                                <div *ngIf="descripcion.errors.required">
+                                    Value is required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success" [disabled]="!noticeForm.form.valid">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            <em class="fa fa-save"></em> <span fxShow.sm="true" fxShow.gt-md="true" fxShow="false"> Guardar</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary" ejs-button [disabled]="!noticeForm.valid">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            <em class="fa fa-check"></em> <span fxShow.sm="true" fxShow.gt-md="true" fxShow="false"> Publicar</span>
+                        </button>
+                        <button type="reset" class="btn btn-default" (click)="newNotice(); noticeForm.reset()">
+                            <em class="fa fa-refresh"></em> <span fxShow.sm="true" fxShow.gt-md="true" fxShow="false"> Refrescar</span>
+                        </button>
+                        <button type="button" (click)="volverALaLista()" class="btn btn-default" ejs-button>
+                            <em class="fa fa-sign-out"></em> <span fxShow.sm="true" fxShow.gt-md="true" fxShow="false"> Cancelar</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div class="row">
-            <div class="col-xs-3">Alter Ego</div>
-            <div class="col-xs-9">{{ model.alterEgo }}</div>
+
+        <div [hidden]="!submitted">
+            <hr>
+            <h2>Datos de la noticia.</h2>
+            <div class="row">
+                <div class="col-xs-3">Titulo: </div>
+                <div class="col-xs-9"> {{ model.titulo }}</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">Resumen: </div>
+                <div class="col-xs-9"> {{ model.resumen }}</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3">Descripción: </div>
+                <div class="col-xs-9"> {{ model.descripcion }}</div>
+            </div>
+            <br>
+            <button class="btn btn-primary" (click)="prepararEdicion(model)" ejs-button><em class="fa fa-edit"></em> Editar</button>
+            <button class="btn btn-default" (click)="volverALaLista()"><em class="fa fa-sign-out"></em> Volver a la lista</button>
         </div>
-        <div class="row">
-            <div class="col-xs-3">Power</div>
-            <div class="col-xs-9">{{ model.power }}</div>
-        </div>
-        <br>
-        <button class="btn btn-primary" (click)="submitted=false">Edit</button>
     </div>
 </div>
-<!---->

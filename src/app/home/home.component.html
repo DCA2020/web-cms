@@ -1,23 +1,26 @@
-﻿<div class="card-columns">
-    <div class="card bg-primary" routerLink="notices" style="cursor: pointer;">
-        <div class="card-body text-center">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-            <p class="card-text"><em class="fa fa-street-view"></em> Noticias!</p>
+﻿<div class="container">
+    <div class="flex-container" fxLayout="column">
+        <div class="card-columns">
+            <div class="card bg-primary" routerLink="notices" style="cursor: pointer;">
+                <div class="card-body text-center">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    <p class="card-text"><em class="fa fa-street-view"></em> Noticias!</p>
+                </div>
+            </div>
+
+            <div class="card bg-danger" routerLink="articles" style="cursor: pointer;">
+                <div class="card-body text-center">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    <p class="card-text"><em class="fa fa-universal-access"></em> Articulos!</p>
+                </div>
+            </div>
+
+            <div class="card bg-success" routerLink="contentsHTML" style="cursor: pointer;">
+                <div class="card-body text-center">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    <p class="card-text"><em class="fa fa-universal-access"></em> Contenidos!</p>
+                </div>
+            </div>
         </div>
     </div>
-
-    <div class="card bg-danger" routerLink="articles" style="cursor: pointer;">
-        <div class="card-body text-center">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-            <p class="card-text"><em class="fa fa-universal-access"></em> Articulos!</p>
-        </div>
-    </div>
-
-    <div class="card bg-success" routerLink="contentsHTML" style="cursor: pointer;">
-        <div class="card-body text-center">
-            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-            <p class="card-text"><em class="fa fa-universal-access"></em> Contenidos!</p>
-        </div>
-    </div>
-
 </div>

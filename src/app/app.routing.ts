@@ -5,9 +5,9 @@ import {NoticeComponent} from "@/_components/notice/notice.component";
 
 const routes: Routes = [
     {path: '', component: HomeComponent, canActivate: [AuthGuard]},
-    {path: 'notices', component: NoticeComponent},
-    {path: 'articles', component: NoticeComponent},
-    {path: 'contentsHTML', component: NoticeComponent},
+    {path: 'notices', component: NoticeComponent, canActivate: [AuthGuard]},
+    {path: 'articles', component: NoticeComponent, canActivate: [AuthGuard]},
+    {path: 'contentsHTML', component: NoticeComponent, canActivate: [AuthGuard]},
     {path: '**', redirectTo: ''}
 ];
 

@@ -11,14 +11,18 @@ export class NoticeService {
     }
 
     getAll() {
-        return this.http.get<NoticeModel[]>(`${config.apiUrl}/api/notices`);
+        return this.http.get<NoticeModel[]>(`${config.apiUrl}/api/noticias`);
     }
 
     create(noticeModel: NoticeModel) {
-        return this.http.post(`${config.apiUrl}/api/notice`, noticeModel);
+        return this.http.post(`${config.apiUrl}/api/noticia`, noticeModel);
+    }
+
+    update(noticeModel: NoticeModel) {
+        return this.http.put(`${config.apiUrl}/api/noticia`, noticeModel);
     }
 
     delete(id: string) {
-        return this.http.delete(`${config.apiUrl}/api/notice/${id}`);
+        return this.http.delete(`${config.apiUrl}/api/noticia/${id}`);
     }
 }

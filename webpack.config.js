@@ -1,6 +1,7 @@
 ﻿const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
+var SRC = path.resolve(__dirname, 'src/app');
 
 module.exports = {
     entry: './src/main.ts',
@@ -39,12 +40,25 @@ module.exports = {
             // workaround for warning: System.import() is deprecated and will be removed soon. Use import() instead.
             {
                 test: /[\/\\]@angular[\/\\].+\.js$/,
-                parser: { system: true }
+                parser: {system: true}
+            },
+            {
+                test: /\.(gif|png|jpe?g|svg)$/i, ///\.(eot|gif|otf|png|svg|ttf|woff)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                //include: SRC,
+                use: ['file-loader',
+                    {
+                        loader: 'image-webpack-loader',
+                        options: {
+                            bypassOnDebug: true, // webpack@1.x
+                            disable: true, // webpack@2.x and newer
+                        },
+                    }
+                ]
             }
         ]
     },
     plugins: [
-        new HtmlWebpackPlugin({ template: './src/index.html' }),
+        new HtmlWebpackPlugin({template: './src/index.html'}),
         new webpack.DefinePlugin({
             // global app config object
             config: JSON.stringify({

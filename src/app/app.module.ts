@@ -20,16 +20,36 @@ import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {SortPipe} from './pipes/sort.pipe';
 import {ArticleComponent} from './_components/article/article.component'
 import {RichTextEditorAllModule} from "@syncfusion/ej2-angular-richtexteditor";
-import {FlexLayoutModule} from "@angular/flex-layout";
 import {NoticeComponent} from "@/_components/notice/notice.component";
+import {BREAKPOINT, FlexLayoutModule} from "@angular/flex-layout";
+import {
+    StyleUtils,
+    StylesheetMap,
+    MediaMarshaller,
+    ɵMatchMedia,
+    BreakPointRegistry,
+    PrintHook,
+    LayoutStyleBuilder,
+    FlexStyleBuilder,
+    ShowHideStyleBuilder,
+    FlexOrderStyleBuilder
+} from "@angular/flex-layout";
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
 }
 
+const EXTRA_BREAKPOINTS = [{
+    alias: 'xs.landscape',
+    suffix: 'XsLandscape',
+    mediaQuery: 'screen and (orientation: landscape) and (max-width: 559px)',
+    priority: 1000,
+    overlapping: false
+}];
+
 @NgModule({
     imports: [
-        BrowserModule,
+        BrowserModule.withServerTransition({appId: 'serverApp'}),
         ReactiveFormsModule,
         HttpClientModule,
         TranslateModule.forRoot({
@@ -45,7 +65,10 @@ export function createTranslateLoader(http: HttpClient) {
         NgbModule,
         FormsModule,
         RichTextEditorAllModule,
-        // FlexLayoutModule
+        FlexLayoutModule.withConfig({
+            useColumnBasisZero: false,
+            printWithBreakpoints: ['md', 'lt-lg', 'lt-xl', 'gt-sm', 'gt-xs']
+        })
     ],
     declarations: [
         AppServiceComponent,
@@ -62,7 +85,10 @@ export function createTranslateLoader(http: HttpClient) {
             {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
             {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
             // provider used to create fake backend
-            fakeBackendProvider],
+            fakeBackendProvider,
+            StyleUtils, StylesheetMap, MediaMarshaller, ɵMatchMedia, BreakPointRegistry, PrintHook, LayoutStyleBuilder, FlexStyleBuilder, ShowHideStyleBuilder, FlexOrderStyleBuilder,
+            {provide: BREAKPOINT, useValue: EXTRA_BREAKPOINTS, multi: true}
+        ],
     bootstrap: [AppServiceComponent]
 })
 
