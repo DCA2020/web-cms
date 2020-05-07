@@ -15,6 +15,16 @@ import {PersonModel} from "@/_models/person";
 import {AlertService, NoticeCategoryService, NoticeService} from "@/_services";
 import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TranslateService} from "@ngx-translate/core";
+import {PaginationComponent} from "@/_directives/pagination/pagination.component";
+import * as jspdf from 'jspdf';
+import html2canvas from 'html2canvas';
+
+import {FormBuilder, FormGroup, FormArray} from "@angular/forms";
+import {HttpEvent, HttpEventType} from '@angular/common/http';
+import {DomSanitizer} from '@angular/platform-browser';
+import {DragdropService} from "@/_services/dragdrop-service.service";
+import {ActivatedRoute, Route, Router} from "@angular/router";
+import {Log} from "@/_utils";
 
 @Component({
     selector: 'app-notice',
@@ -26,6 +36,7 @@ export class NoticeComponent implements OnInit {
     loading = false;
     loadingFull = false;
     public categorias: NoticeCategoryModel[];
+    myLogger = new Log();
 
     public value: string = `<p>Digite el contenido de la noticia en esta area, puede usar formato html.</p>`
     public activeLang = 'es';
@@ -35,6 +46,26 @@ export class NoticeComponent implements OnInit {
     closeResult: string;
     creandoNuevo = false;
     actualizando = false;
+    //#region PAGINACION
+    public config: any;
+    public maxSize: number = 7;
+    public directionLinks: boolean = true;
+    public autoHide: boolean = false;
+    public responsive: boolean = true;
+    public labels: any = {
+        previousLabel: '<--',
+        nextLabel: '-->',
+        screenReaderPaginationLabel: 'Paginacion',
+        screenReaderPageLabel: 'pagina',
+        screenReaderCurrentLabel: 'Estas en la pagina'
+    };
+    //#endregion
+    fileArr = [];
+    imgArr = [];
+    fileObj = [];
+    form: FormGroup;
+    msg: string;
+    progress: number = 0;
 
     //public value: string = null;
 
@@ -42,7 +73,11 @@ export class NoticeComponent implements OnInit {
                 public noticeCategoryService: NoticeCategoryService,
                 public noticeService: NoticeService,
                 private alertService: AlertService,
-                private translate: TranslateService
+                private translate: TranslateService,
+                public fb: FormBuilder,
+                private sanitizer: DomSanitizer,
+                public dragdropService: DragdropService,
+                private router: Router
     ) {
         this.translate.setDefaultLang(this.activeLang);
         this.loadingFull = true;
@@ -50,99 +85,44 @@ export class NoticeComponent implements OnInit {
 
     ngOnInit(): void {
         this.cargarTodasLasNoticias();
-        this.noticeCategoryService.getAll()
-            .pipe(first())
-            .subscribe(categorys => {
-                    this.categorias = categorys;
-                    console.log('categorys: ', categorys);
-                    this.model.categoriaNoticia = categorys[0];
-                    this.loading = false;
-                    this.loadingFull = false;
-                },
-                error => {
-                    this.alertService.error(error);
-                    this.loading = false;
-                });
+        this.form = this.fb.group({
+            avatar: [null]
+        })
+
+        this.loading = false;
+        this.loadingFull = false;
     }
 
-    noticeState = new NoticeStateModel(1, '1', 'Aprobado', '', true, '');
-    noticeCategory = new NoticeCategoryModel(1, '5e932f70edc85840601546c5', 'Noticias', '', true, '');
-    persona = new PersonModel(1, '1', 'YSUAREZ', '', true, '6803296');
-    //#region MODELOS
-    model = new NoticeModel(18,
-        '18',
-        'Noticia IQ _ 18',
-        '',
-        '',
-        '',
-        this.noticeState,
-        this.noticeCategory,
-        '',
-        '',
-        1,
-        1,
-        0,
-        true,
-        this.persona,
-        new Date(),
-        this.persona,
-        new Date(),
-        '',
-        '',
-        true,
-        '1080931527');
-
-    newNotice() {
-        this.model = new NoticeModel(18,
-            '18',
-            'Noticia IQ _ 18',
-            '',
-            '',
-            '',
-            this.noticeState,
-            this.noticeCategory,
-            '',
-            '',
-            1,
-            1,
-            0,
-            true,
-            this.persona,
-            new Date(),
-            this.persona,
-            new Date(),
-            '',
-            '',
-            true,
-            '1080931527');
+    irAlDetalle(noticia_: NoticeModel): void {
+        this.router.navigate(['/app-notice-detail', {enEdicion: 'false'} ]);
     }
 
-    //#endregion
-
-    rteCreated(): void {
-        //console.log('this.rteEle.element.focus();');
-        //this.rteEle.element.focus();
+    irAEdicion(noticia_: NoticeModel): void {
+        this.noticeService.noticeInEditing = noticia_;
+        this.router.navigate(['/app-notice-create', {enEdicion: 'true'}]);
     }
 
-    onSubmit(): void {
-        this.loadingFull = true;
-        this.model.descripcion = this.value;
-        console.log('this.model:', this.model);
-        if (this.actualizando) {
-            this.noticeService.update(this.model)
-                .pipe(first())
-                .subscribe(() => {
-                    this.submitted = true;
-                    this.loadingFull = false;
-                });
-        } else {
-            this.noticeService.create(this.model)
-                .pipe(first())
-                .subscribe(() => {
-                    this.submitted = true;
-                    this.loadingFull = false;
-                });
-        }
+    onPageChange(event) {
+        console.log('event:', event);
+        this.config.currentPage = event;
+    }
+
+    exportAsPDF(MyDIv) {
+        let data = document.getElementById(MyDIv);
+        html2canvas(data).then(canvas => {
+            const contentDataURL = canvas.toDataURL('image/png')
+            let pdf = new jspdf('l', 'cm', 'a4'); //Generates PDF in landscape mode
+            // let pdf = new jspdf('p', 'cm', 'a4'); Generates PDF in portrait mode
+            pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);
+            pdf.save('Filename.pdf');
+        });
+    }
+
+
+
+    // Clean Url
+    sanitize(url: string) {
+        return this.sanitizer.bypassSecurityTrustUrl(url);
     }
 
     eliminarNoticia(id: string) {
@@ -151,25 +131,9 @@ export class NoticeComponent implements OnInit {
             .subscribe(() => this.cargarTodasLasNoticias());
     }
 
-    prepararEdicion(noticeModel: NoticeModel) {
-        console.log('noticeModel:',  noticeModel)
-        this.creandoNuevo = true;
-        this.submitted = false;
-        this.actualizando = true;
-        this.value = noticeModel.descripcion;
-        this.model.descripcion = this.value;
-        this.model = noticeModel;
-    }
-
-    volverALaLista(): void {
-        this.model = null;
-        this.creandoNuevo = false;
-        this.submitted = true;
-        this.cargarTodasLasNoticias();
-    }
 
     nuevaNoticia(): void {
-        this.model = new NoticeModel(18,
+        /*this.model = new NoticeModel(18,
             '18',
             'Titulo de la noticia.',
             '',
@@ -190,16 +154,26 @@ export class NoticeComponent implements OnInit {
             '',
             '',
             true,
-            '1080931527');
+            '1080931527');*/
         this.creandoNuevo = true;
         this.submitted = false;
         this.actualizando = false;
     }
 
-    private cargarTodasLasNoticias() {
+    cargarTodasLasNoticias() {
         this.noticeService.getAll()
             .pipe(first())
-            .subscribe(noticias => this.noticias = noticias);
+            .subscribe(noticias => {
+                this.noticias = noticias;
+                //this.paginacionComponent.array = this.noticias;
+                //this.paginacionComponent.activate(this.noticias);
+                this.config = {
+                    id: 'custom',
+                    itemsPerPage: 8,
+                    currentPage: 1,
+                    totalItems: this.noticias.length
+                };
+            });
     }
 
     open(content, noticeModel: NoticeModel) {

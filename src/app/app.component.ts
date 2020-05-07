@@ -1,7 +1,7 @@
 ﻿import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from './_services';
-import './_content/styles.less';
+import './_styles/styles.less';
 import {UserModel} from "@/_models";
 
 @Component({

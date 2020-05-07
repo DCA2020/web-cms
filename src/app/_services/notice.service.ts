@@ -7,6 +7,8 @@ import {NoticeModel} from "../_models";
 })
 export class NoticeService {
 
+    public noticeInEditing: NoticeModel;
+
     constructor(private http: HttpClient) {
     }
 

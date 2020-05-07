@@ -1,0 +1,60 @@
+<style>
+
+    .custom-pagination .page-number {
+        display: inline-block;
+        /* padding: 5px 12px; */
+        background: #afffe6;
+        margin: 0px 4px;
+        border-radius: 25px;
+    }
+
+    .page-number.current {
+        background: #ffffff !important;
+        border: 2px solid #458873;
+    }
+
+    .page-number span {
+        display: block;
+        width: 28px;
+        height: 28px;
+        font-size: 18px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .pagination-previous, .pagination-next {
+        display: inline-block;
+        font-weight: bold;
+    }
+</style>
+<!--
+<pagination-controls [maxSize]="maxSize"
+                     [directionLinks]="directionLinks"
+                     [autoHide]="autoHide"
+                     [responsive]="responsive"
+                     [previousLabel]="labels.previousLabel"
+                     [nextLabel]="labels.nextLabel"
+                     [screenReaderPaginationLabel]="labels.screenReaderPaginationLabel"
+                     [screenReaderPageLabel]="labels.screenReaderPageLabel"
+                     [screenReaderCurrentLabel]="labels.screenReaderCurrentLabel"
+                     (pageChange)="onPageChange($event)"></pagination-controls>
+--><!---->
+<pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
+    <div class="custom-pagination">
+        <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
+                        <span *ngIf="!p.isFirstPage()" (click)="p.previous()"><
+                        </span>
+        </div>
+        <div class="page-number" *ngFor="let page of p.pages"
+             [class.current]="p.getCurrent() === page.value">
+                        <span (click)="p.setCurrent(page.value)"
+                              *ngIf="p.getCurrent() !== page.value">{{ page.label }}</span>
+            <div *ngIf="p.getCurrent() === page.value">
+                <span>{{ page.label }}</span>
+            </div>
+        </div>
+        <div class="pagination-next" [class.disabled]="p.isLastPage()">
+            <span *ngIf="!p.isLastPage()" (click)="p.next()"> > </span>
+        </div>
+    </div>
+</pagination-template>

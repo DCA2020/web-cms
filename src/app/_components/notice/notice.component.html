@@ -4,6 +4,141 @@
         background-color: #f2dede;
         border-color: #ebccd1;
     }
+
+    .custom-pagination .page-number {
+        display: inline-block;
+        /* padding: 5px 12px; */
+        background: #afffe6;
+        margin: 0px 4px;
+        border-radius: 25px;
+    }
+
+    .page-number.current {
+        background: #ffffff !important;
+        border: 2px solid #458873;
+    }
+
+    .page-number span {
+        display: block;
+        width: 28px;
+        height: 28px;
+        font-size: 18px;
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .pagination-previous, .pagination-next {
+        display: inline-block;
+        font-weight: bold;
+    }
+
+    /*
+    h1 {
+        margin-top: -10px !important;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        padding: 25px 0 0 0;
+        background: #291464;
+    }
+
+    .container {
+        margin-top: 30px;
+        max-width: 500px;
+    }
+
+    .progress {
+        margin-bottom: 30px;
+    }
+
+    .fileupload {
+        background-image: url("./assets/upload-icon.png");
+        background-repeat: no-repeat;
+        background-size: 100px;
+        background-position: center;
+        background-color: #ffffff;
+        height: 200px;
+        width: 100%;
+        cursor: pointer;
+        border-radius: 6px;
+        margin-bottom: 25px;
+        background-position: center 28px;
+    }
+
+    .ddinfo {
+        display: block;
+        text-align: center;
+        padding-top: 130px;
+        color: #a0a1a2;
+    }
+
+    .image-list {
+        display: flex;
+        width: 100%;
+        background: #C2DFFC;
+        border: 1px solid;
+        border-radius: 3px;
+        padding: 10px 10px 10px 15px;
+        margin-bottom: 10px;
+    }
+
+    .image-list p {
+        line-height: normal;
+        padding: 0;
+        margin: 0 0 0 14px;
+        display: inline-block;
+        position: relative;
+        top: -2px;
+        color: #150938;
+        font-size: 14px;
+    }
+
+    .message {
+        text-align: center;
+        color: #C2DFFC;
+    }
+
+    .remove {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    .profile {
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+        border-radius: 4px;
+        display: inline-block;
+    }
+
+    .profile img {
+        width: 100%;
+    }
+
+    .remove img {
+        width: 15px;
+        position: relative;
+        top: -2px;
+    }
+
+    .fileUploadWrapper .card-body {
+        max-height: 330px;
+        overflow: hidden;
+        overflow-y: auto;
+    }
+
+    @media(max-width: 767px) {
+        .container {
+            width: 280px;
+            margin: 20px auto 100px;
+        }
+    }*/
 </style>
 <div *ngIf="loadingFull" style="text-align: center;">
     <img src="../../../../assets/images/loading.gif" width="124" height="124"/><br>
@@ -15,37 +150,129 @@
         <span fxShow.sm="true" fxShow.gt-md="true" fxShow="false"> Nueva Noticia</span>
     </button>
     <h1>{{'principal.noticias.titulo_panel' | translate}}</h1>
-    <div class="container" *ngIf="!creandoNuevo">
+    <toast-global></toast-global>
+    <div class="container" id="tablaNoticias" *ngIf="!creandoNuevo">
         <div class="container-fluid" style="margin-top: 10px">
             <div class="table-row wrapper header" fxShow.sm="true" fxShow.gt-md="true" fxShow="false">
                 <div class="wrapper text-4">
                     <div class="wrapper text-2">
-                        <div class="text">Titulo</div>
-                        <div class="text">Resumen</div>
-                        <div class="text">Eliminar</div>
-                        <div class="text">Editar</div>
+                        <div class="text" style="width: 20% !important;">Titulo</div>
+                        <div class="text" style="width: 40% !important;">Resumen</div>
+                        <div class="text" style="width: 10% !important;">Eliminar</div>
+                        <div class="text" style="width: 10% !important;">Visualizar</div>
+                        <div class="text" style="width: 12% !important;">Editar</div>
+                        <div class="text" style="width: 8% !important;">PDF</div>
                     </div>
                 </div>
             </div>
-            <div class="table-row wrapper" *ngFor="let noticia of noticias">
+            <div class="table-row wrapper" *ngFor="let noticia of noticias | paginate: config">
                 <div class="wrapper text-4">
                     <div class="wrapper text-2">
-                        <div class="text">
-                            <span fxShow.sm="false" fxShow.gt-md="false" fxShow="true">Titulo: </span>{{noticia.titulo}}</div>
-                        <div class="text" title="{{noticia.resumen}}">
-                            <span fxShow.sm="false" fxShow.gt-md="false" fxShow="true">Resumen: </span>{{noticia.resumen}}</div>
-                        <div class="text">
-                            <a (click)="open(mymodal, noticia)" class="btn btn-danger text-white" ><em class="fa fa-remove"></em>
-                            <span> Eliminar</span></a>
+
+                        <div class="text" fxShow.sm="true" fxShow.gt-md="true" fxShow="false"
+                             style="width: 20% !important;" title="{{noticia.titulo}}">
+                            {{noticia.titulo}}
                         </div>
-                        <div class="text">
-                            <a (click)="prepararEdicion(noticia)" class="btn btn-success text-white" ><em class="fa fa-edit"></em>
-                            <span> Editar</span></a>
+
+                        <div class="text" fxShow.sm="false" fxShow.gt-md="false" fxShow="true">
+                            <span>Titulo: </span>{{noticia.titulo}}
                         </div>
+
+                        <div class="text" fxShow.sm="true" fxShow.gt-md="true" fxShow="false"
+                             style="width: 40% !important;" title="{{noticia.resumen}}">
+                            {{noticia.resumen}}
+                        </div>
+
+                        <div class="text" fxShow.sm="false" fxShow.gt-md="false" fxShow="true">
+                            <span>Resumen: </span>{{noticia.resumen}}
+                        </div>
+
+                        <div class="text" style="width: 10% !important;" fxShow.sm="true" fxShow.gt-md="true"
+                             fxShow="false">
+                            <a (click)="open(mymodal, noticia)" class="btn btn-danger text-white" placement="top"
+                               ngbTooltip="Clic para eliminar esta noticia">
+                                <em class="fa fa-remove"></em>
+                                <span> Eliminar</span>
+                            </a>
+                        </div>
+
+                        <div class="text" style="width: 12% !important;" fxShow.sm="true" fxShow.gt-md="true"
+                             fxShow="false">
+                            <a (click)="irAlDetalle(noticia)" class="btn btn-info text-white" placement="top"
+                               ngbTooltip="Click para descargar pdf del contenido de la noticia.">
+                                <em class="fa fa-desktop"></em>
+                                <span> Visualizar</span>
+                            </a>
+                        </div>
+
+                        <div class="text" style="width: 10% !important;" fxShow.sm="true" fxShow.gt-md="true"
+                             fxShow="false">
+                            <a (click)="irAEdicion(noticia)" class="btn btn-success text-white" placement="top"
+                               ngbTooltip="Clic para Editar esta noticia">
+                                <em class="fa fa-edit"></em>
+                                <span> Editar</span>
+                            </a>
+                        </div>
+
+                        <div class="text" style="width: 8% !important;" fxShow.sm="true" fxShow.gt-md="true"
+                             fxShow="false">
+                            <a (click)="exportAsPDF('tablaNoticias');" class="btn btn-danger text-white" placement="top"
+                               ngbTooltip="Click para descargar pdf del contenido de la noticia.">
+                                <em class="fa fa-file-pdf-o"></em>
+                                <span> PDF</span>
+                            </a>
+                        </div>
+
+                        <div class="text" fxShow.sm="false" fxShow.gt-md="false" fxShow="true">
+                            <a (click)="open(mymodal, noticia)" class="btn btn-danger text-white">
+                                <em class="fa fa-remove"></em>
+                            </a>
+
+                            <a (click)="irAlDetalle(noticia)" class="btn btn-success text-white">
+                                <em class="fa fa-edit"></em>
+                            </a>
+
+                            <a (click)="irAEdicion(noticia)" class="btn btn-success text-white">
+                                <em class="fa fa-desktop"></em>
+                            </a>
+
+                            <a (click)="exportAsPDF('tablaNoticias');" class="btn btn-danger text-white">
+                                <em class="fa fa-file-pdf-o"></em>
+                            </a>
+                        </div>
+
                     </div>
                 </div>
-            </div>
+            </div><!--
+            <div id="MyDIv" style="margin-left: 45px;" class="main-container">
+            </div>-->
+            <br>
+            <pagination-template #p="paginationApi" [id]="config.id" (pageChange)="config.currentPage = $event">
+                <div class="custom-pagination">
+                    <div class="pagination-previous" [class.disabled]="p.isFirstPage()">
+                        <span *ngIf="!p.isFirstPage()" (click)="p.previous()"><
+                        </span>
+                    </div>
+                    <div class="page-number" *ngFor="let page of p.pages"
+                         [class.current]="p.getCurrent() === page.value">
+                        <span (click)="p.setCurrent(page.value)"
+                              *ngIf="p.getCurrent() !== page.value">{{ page.label }}</span>
+                        <div *ngIf="p.getCurrent() === page.value">
+                            <span>{{ page.label }}</span>
+                        </div>
+                    </div>
+                    <div class="pagination-next" [class.disabled]="p.isLastPage()">
+                        <span *ngIf="!p.isLastPage()" (click)="p.next()"> > </span>
+                    </div>
+                </div>
+            </pagination-template>
+
+
+            <!--<app-pagination></app-pagination>
+            -->
+            <!--<app-paginacion array="noticias"></app-paginacion>-->
         </div>
+
         <ng-template #mymodal let-modal>
             <div class="modal-header">
                 <h4 class="modal-title" id="modal-basic-title" style="color: #0d3349 !important;">Eliminando ...</h4>
@@ -66,87 +293,5 @@
             </div>
         </ng-template>
     </div>
-    <div class="container" *ngIf="creandoNuevo">
-        <div [hidden]="submitted">
-            <form (ngSubmit)="onSubmit()" #noticeForm="ngForm" id="noticeForm">
-                <div class="flex-container" fxLayout="column">
-                    <div class="card-text">
-                        <div class="form-group">
-                            <label for="titulo">Titulo</label>
-                            <input type="text" class="form-control" id="titulo" required [(ngModel)]="model.titulo"
-                                   name="titulo" #titulo="ngModel">
-                            <div [hidden]="titulo.valid || titulo.pristine" class="alert alert-danger">
-                                El titulo es requerido
-                            </div>
-                        </div>
 
-                        <div class="form-group">
-                            <label for="resumen">Resumen</label>
-                            <textarea type="textarea" class="form-control" id="resumen" [(ngModel)]="model.resumen"
-                                      name="resumen"></textarea>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="categoria">Categoria</label>
-                            <select class="form-control" id="categoria" required [(ngModel)]="model.categoriaNoticia"
-                                    name="categoria" #categoria="ngModel">
-                                <option *ngFor="let categoria of categorias" [value]="categoria">{{categoria.categoria}}</option>
-                            </select>
-                            <div [hidden]="categoria.valid || categoria.pristine" class="alert alert-danger">
-                                La categoria es requerida.
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="descripcion">Contenido HTML</label>
-                            <ejs-richtexteditor id="descripcion" #fromRTE #descripcion='ngModel' [(value)]='value'
-                                                required
-                                                name="descripcion" [(ngModel)]="value"
-                                                (created)="rteCreated()"></ejs-richtexteditor>
-                            <div *ngIf="(descripcion.invalid && descripcion.touched)" class="alert alert-danger">
-                                <div *ngIf="descripcion.errors.required">
-                                    Value is required.
-                                </div>
-                            </div>
-                        </div>
-
-                        <button type="submit" class="btn btn-success" [disabled]="!noticeForm.form.valid">
-                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                            <em class="fa fa-save"></em> <span fxShow.sm="true" fxShow.gt-md="true" fxShow="false"> Guardar</span>
-                        </button>
-                        <button type="submit" class="btn btn-primary" ejs-button [disabled]="!noticeForm.valid">
-                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
-                            <em class="fa fa-check"></em> <span fxShow.sm="true" fxShow.gt-md="true" fxShow="false"> Publicar</span>
-                        </button>
-                        <button type="reset" class="btn btn-default" (click)="newNotice(); noticeForm.reset()">
-                            <em class="fa fa-refresh"></em> <span fxShow.sm="true" fxShow.gt-md="true" fxShow="false"> Refrescar</span>
-                        </button>
-                        <button type="button" (click)="volverALaLista()" class="btn btn-default" ejs-button>
-                            <em class="fa fa-sign-out"></em> <span fxShow.sm="true" fxShow.gt-md="true" fxShow="false"> Cancelar</span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
-        <div [hidden]="!submitted">
-            <hr>
-            <h2>Datos de la noticia.</h2>
-            <div class="row">
-                <div class="col-xs-3">Titulo: </div>
-                <div class="col-xs-9"> {{ model.titulo }}</div>
-            </div>
-            <div class="row">
-                <div class="col-xs-3">Resumen: </div>
-                <div class="col-xs-9"> {{ model.resumen }}</div>
-            </div>
-            <div class="row">
-                <div class="col-xs-3">Descripción: </div>
-                <div class="col-xs-9"> {{ model.descripcion }}</div>
-            </div>
-            <br>
-            <button class="btn btn-primary" (click)="prepararEdicion(model)" ejs-button><em class="fa fa-edit"></em> Editar</button>
-            <button class="btn btn-default" (click)="volverALaLista()"><em class="fa fa-sign-out"></em> Volver a la lista</button>
-        </div>
-    </div>
 </div>

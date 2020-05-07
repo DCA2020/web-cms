@@ -1,0 +1,157 @@
+<div *ngIf="loadingFull" style="text-align: center;">
+    <img src="../../../../../assets/images/loading.gif" width="124" height="124"/><br>
+    Cargando ...
+</div>
+<div *ngIf="!loadingFull">
+    <div class="container" *ngIf="creandoNuevo">
+        <div [hidden]="submitted">
+
+            <!-- ng-show="document.getElementById('srcData').src!=null"-->
+            <!-- <form role="form" id="formUpload" novalidate>
+                <div class="custom-file mb-3">
+                    <input type="file" name="file" id="file"
+                           class="custom-file-input"
+                           onchange="encodeImageFileAsURL();" accept="image/*"
+                           ngf-max-height="1000" ngf-max-size="1MB">
+                    <label for="file" class="custom-file-label">Choose
+                        File</label>
+                    <div id="imgTest"
+                         style="max-width:250px !important; float: left;"></div>
+                </div>
+                <input type="submit" value="Subir Imagen"
+                       class="btn btn-primary btn-block"
+                       id="sinImagenSeleccionada">
+                <hr>
+                <img id="imagenPrincipal"
+                     src="../../../../assets/img/coronavirusmedicina.jpg" alt=""
+                     style="max-width:280px; max-height: 280px;">
+                <div ng-if="files">
+
+                     <ul>
+                        <li ng-repeat="custInfo in files" style="max-width:250px;">
+                            <img src="../../../../assets/img/coronavirusmedicina.jpg" alt="" style="max-width:250px;">
+                            <button type="button" ng-click="eliminarImagen(custInfo._id);"
+                                class="btn btn-danger btn-block mt-4">Eliminar</button>
+
+                        </li>
+                    </ul>
+                </div>
+
+            </form>-->
+
+            <form (ngSubmit)="onSubmit()" #noticeForm="ngForm" id="noticeForm">
+                <div class="flex-container" fxLayout="column">
+                    <div class="card-text">
+                        <div class="form-group">
+                            <label for="titulo">Titulo</label>
+                            <input type="text" class="form-control" id="titulo" required [(ngModel)]="model.titulo"
+                                   name="titulo" #titulo="ngModel">
+                            <div [hidden]="titulo.valid || titulo.pristine" class="alert alert-danger">
+                                El titulo es requerido
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="resumen">Resumen</label>
+                            <textarea type="textarea" class="form-control" id="resumen" [(ngModel)]="model.resumen"
+                                      name="resumen"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="categoria">Categoria</label>
+                            <select class="form-control" id="categoria" required [(ngModel)]="model.categoriaNoticia"
+                                    name="categoria" #categoria="ngModel">
+                                <option *ngFor="let categoria of categorias"
+                                        [value]="categoria">{{categoria.categoria}}</option>
+                            </select>
+                            <div [hidden]="categoria.valid || categoria.pristine" class="alert alert-danger">
+                                La categoria es requerida.
+                            </div>
+                        </div><!--
+                        <div class="container fileUploadWrapper">
+                            <form [formGroup]="form">
+                                <div class="row">
+                                    <div class="col-md-12" *ngIf="progress">
+                                        <div class="progress form-group">
+                                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                                                 [style.width.%]="progress">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="fileupload" appDragDropFileUpload (click)="fileField.click()"
+                                             (fileDropped)="upload($event)">
+                                            <span class="ddinfo">Choose a file or drag here</span>
+                                            <input type="file" name="avatars" #fileField (change)="upload($event.target.files)" hidden multiple>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-12">
+                                        <div class="image-list" *ngFor="let file of fileArr; let i = index">
+                                            <div class="profile">
+                                                <img [src]="sanitize(file['url'])" alt="">
+                                            </div>
+                                            <p>{{file.item.name}}</p>
+                                        </div>
+                                        <p class="message">{{msg}}</p>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>-->
+                        <div class="form-group">
+                            <label for="descripcion">Contenido HTML</label>
+                            <ejs-richtexteditor id="descripcion" #fromRTE #descripcion='ngModel' [(value)]='value'
+                                                required height="300"
+                                                name="descripcion" [(ngModel)]="value"
+                                                (created)="rteCreated()"></ejs-richtexteditor>
+                            <div *ngIf="(descripcion.invalid && descripcion.touched)" class="alert alert-danger">
+                                <div *ngIf="descripcion.errors.required">
+                                    Value is required.
+                                </div>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-success" [disabled]="!noticeForm.form.valid">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            <em class="fa fa-save"></em> <span fxShow.sm="true" fxShow.gt-md="true" fxShow="false"> Guardar</span>
+                        </button>
+                        <button type="submit" class="btn btn-primary" ejs-button [disabled]="!noticeForm.valid">
+                            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                            <em class="fa fa-check"></em> <span fxShow.sm="true" fxShow.gt-md="true" fxShow="false"> Publicar</span>
+                        </button>
+                        <button type="reset" class="btn btn-default" (click)="newNotice(); noticeForm.reset()">
+                            <em class="fa fa-refresh"></em> <span fxShow.sm="true" fxShow.gt-md="true" fxShow="false"> Refrescar</span>
+                        </button>
+                        <button type="button" (click)="volverALaLista()" class="btn btn-default" ejs-button>
+                            <em class="fa fa-sign-out"></em> <span fxShow.sm="true" fxShow.gt-md="true" fxShow="false"> Cancelar</span>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!--
+                <div [hidden]="!submitted">
+                    <hr>
+                    <h2>Datos de la noticia.</h2>
+                    <div class="row">
+                        <div class="col-xs-3">Titulo:</div>
+                        <div class="col-xs-9"> {{ model.titulo }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-3">Resumen:</div>
+                        <div class="col-xs-9"> {{ model.resumen }}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12">Descripcion:</div>
+                        <hr>
+                        <div class="col-xs-12" [innerHTML]="model.descripcion"></div>
+                    </div>
+                    <br>
+                    <button class="btn btn-primary" (click)="prepararEdicion(model)" ejs-button><em class="fa fa-edit"></em> Editar</button>
+            <button type="button" class="btn btn-success" (click)="volverALaLista()"><em class="fa fa-sign-out"></em>
+                Volver a la lista
+            </button>
+        </div>-->
+    </div>
+</div>

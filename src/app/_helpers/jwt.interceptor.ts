@@ -76,7 +76,7 @@ export class JwtInterceptor implements HttpInterceptor {
                 mensaje = 'Error al ejecutar el proceso.';
                 break;
             default:
-                mensaje = 'Se presento un problema con la aplicación, por favor comuniquese con un administrador.';
+                mensaje = 'Se presento un problema con la aplicacion, por favor comuniquese con un administrador.';
                 break;
         }
         if (environment.enTest) {

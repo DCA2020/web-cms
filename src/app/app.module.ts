@@ -2,8 +2,6 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule, HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
-// used to create fake backend
-import {fakeBackendProvider} from './_helpers';
 import {appRoutingModule} from './app.routing';
 import {JwtInterceptor, ErrorInterceptor} from './_helpers';
 import {AppServiceComponent} from './app.component';
@@ -34,6 +32,16 @@ import {
     ShowHideStyleBuilder,
     FlexOrderStyleBuilder
 } from "@angular/flex-layout";
+import {NgxPaginationModule} from "ngx-pagination";
+import {PaginationComponent} from "@/_directives/pagination/pagination.component";
+import {DragDropFileUploadDirective} from './_directives/drag-drop-file-upload.directive';
+import {NoticeDetailComponent} from './_components/notice/notice-detail/notice-detail.component';
+import {NoticeCreateComponent} from './_components/notice/notice-create/notice-create.component';
+
+;
+import {ToastGlobalComponent} from './_directives/toast/toast-global/toast-global.component'
+    ;
+import {ToastsContainersComponent} from './_directives/toast/toasts-containers/toasts-containers.component'
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
@@ -68,7 +76,8 @@ const EXTRA_BREAKPOINTS = [{
         FlexLayoutModule.withConfig({
             useColumnBasisZero: false,
             printWithBreakpoints: ['md', 'lt-lg', 'lt-xl', 'gt-sm', 'gt-xs']
-        })
+        }),
+        NgxPaginationModule
     ],
     declarations: [
         AppServiceComponent,
@@ -79,15 +88,21 @@ const EXTRA_BREAKPOINTS = [{
         CalendarComponent,
         SortPipe,
         ArticleComponent,
-        NoticeComponent],
+        NoticeComponent,
+        PaginationComponent,
+        DragDropFileUploadDirective,
+        NoticeDetailComponent,
+        NoticeCreateComponent,
+        ToastsContainersComponent,
+        ToastGlobalComponent],
+    exports: [PaginationComponent],
     providers:
         [
             {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
             {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
-            // provider used to create fake backend
-            fakeBackendProvider,
             StyleUtils, StylesheetMap, MediaMarshaller, ɵMatchMedia, BreakPointRegistry, PrintHook, LayoutStyleBuilder, FlexStyleBuilder, ShowHideStyleBuilder, FlexOrderStyleBuilder,
-            {provide: BREAKPOINT, useValue: EXTRA_BREAKPOINTS, multi: true}
+            {provide: BREAKPOINT, useValue: EXTRA_BREAKPOINTS, multi: true},
+            PaginationComponent
         ],
     bootstrap: [AppServiceComponent]
 })
