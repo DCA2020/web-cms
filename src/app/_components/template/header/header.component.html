@@ -1,0 +1,118 @@
+<div
+    style="background-color: #9c27b0 !important; width: 100% !important; margin-top: -30px !important; padding-top: 20px;">
+    <app-link-left></app-link-left>
+    <app-link-right></app-link-right>
+    <div
+        style="background-color: #9c27b0 !important; margin: 0px auto !important; width: 90% !important; padding: 0px !important; color: #fafbfc;">
+        <ul class="nav nav-pills" fxShow.sm="true" fxShow.gt-md="true" fxShow="false"
+            style="width: 90% !important;margin: 0px auto !important; ">
+            <li class="nav-item">
+                <a class="nav-link active" (click)="cargarContenido(dangerTpl, 'app-content')" placement="bottom"
+                   ngbTooltip="Volver al inicio">
+                    <img src="../../../../assets/img/svg/home_work-white.svg" width="40" alt="logo"
+                         style="margin-top:-8px; padding: 5px; margin-right:5px;border-radius: 5%;">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="cargarContenido(dangerTpl, 'app-login')" placement="bottom"
+                   ngbTooltip="Panel de administraci&oacute;n">
+                    <img src="../../../../assets/img/svg/admin.svg" width="40" alt="logo" class="white-icon"
+                         style="margin-top:-8px; padding: 5px; margin-right:5px;border-radius: 5%;">
+                    Admin</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="cargarContenido(dangerTpl, 'app-notices')" placement="bottom"
+                   ngbTooltip="Panel de noticias">
+                    <img src="../../../../assets/img/svg/notice.svg" width="40" alt="logo"
+                         style="margin-top:-8px; padding: 5px; margin-right:5px; border-radius: 5%;">
+                    Noticias</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="cargarContenido(dangerTpl, 'contenidos')" href="#" placement="bottom"
+                   ngbTooltip="Panel de contenidos">
+                    <img src="../../../../assets/img/svg/contenidos.svg" width="40" alt="logo"
+                         style="margin-top:-8px; padding: 5px; margin-right:5px; border-radius: 5%;">
+                    Contenidos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="cargarContenido(dangerTpl, 'novedades')" href="#" placement="bottom"
+                   ngbTooltip="Panel de novedades">
+                    <img src="../../../../assets/img/svg/novedades.svg" width="40" alt="logo"
+                         style="margin-top:-8px; padding: 5px; margin-right:5px;border-radius: 5%;">
+                    Novedades</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="cargarContenido(dangerTpl, 'app-register-community')" placement="bottom"
+                   ngbTooltip="Registrarse a la comunidad de afrocaq">
+                    <img src="../../../../assets/img/svg/registro.svg" width="40" alt="logo" class="red-icon"
+                         style="margin-top:-8px; padding: 5px; margin-right:5px;border-radius: 5%;">
+                    Registro</a>
+            </li>
+            <li class="nav-item" >
+                <a class="nav-link disabled" href="#" placement="bottom"
+                   ngbTooltip="Cerrar sesión" style="">
+                    <img src="../../../../assets/img/svg/power_off.svg" width="40" alt="logo"
+                         style="margin-top:-8px; padding: 5px; margin-right:5px;background-color: #EAEAEA; border-radius: 5%;">Salir</a>
+            </li>
+            <li>
+                <a class="navbar-brand" style="margin-top: -10px;">
+                    <img src="../../../../assets/img/logoafrocaq.png" width="124" alt="logo"
+                         style="margin-top:-8px; padding: 5px; margin-right:5px;background-color: #EAEAEA; border-radius: 5%; ">
+                    <div style=" font-size: 1.5rem; margin-top:-30px !important; float: right; margin-left: 10px;">
+                        <br/>
+                        <span id="update" class="user"><i class="icon-user-md"></i>Yovany Su&aacute;rez Silva</span><br/>
+                        <div id="Fecha_Reloj" class="reloj"></div>
+                        Fundaci&oacute;n Afrocolombiana del Caquet&aacute;.<i class="icon-angle-right"></i>
+                    </div>
+                </a>
+            </li>
+        </ul>
+
+        <ul class="nav justify-content-end" style="margin-top: -40px !important;" fxShow.sm="true" fxShow.gt-md="true" fxShow="false">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Mi panel</a>
+            </li><!--
+            <li class="nav-item">
+                <a class="nav-link" href="#">Perfil</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>-->
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#"><img src="../../../../assets/img/svg/novedades.svg" width="40" alt="logo"
+                                                           style="margin-top:-8px; padding: 5px; margin-right:5px;border-radius: 5%;">Perfil</a>
+            </li>
+        </ul>
+
+        <ul class="nav nav-pills" fxShow.sm="false" fxShow.gt-md="false" fxShow="true">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Inicio</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                   aria-expanded="false">Enlaces</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">Admin</a>
+                    <a class="dropdown-item" href="#">Noticias</a>
+                    <a class="dropdown-item" href="#">Novedades</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Separated link</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Novedades</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Cerrar</a>
+            </li>
+        </ul>
+    </div>
+
+</div>
+<ng-template #dangerTpl>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="#fff" width="24" height="24" viewBox="0 0 24 24">
+        <path
+            d="M10.872 6.831l1.695 3.904 3.654-1.561-1.79 3.426 3.333.954-3.417 1.338 2.231 4.196-4.773-2.582-2.869 2.287.413-3.004-3.792-.726 2.93-1.74-1.885-2.512 3.427.646.843-4.626zm-.786-6.831l-1.665 9.119-6.512-1.228 3.639 4.851-5.548 3.294 7.108 1.361-.834 6.076 5.742-4.577 9.438 5.104-4.288-8.064 6.834-2.677-6.661-1.907 3.25-6.22-6.98 2.982-3.523-8.114z"/>
+    </svg>
+    cargando pagina ...
+</ng-template>
+<app-toasts aria-live="polite" aria-atomic="true"></app-toasts>

@@ -1,0 +1,34 @@
+@media (min-width: 576px) {
+    #carbonads {
+        max-width: 330px;
+        border-radius: 4px;
+    }
+
+    #carbonads {
+        position: static;
+        display: block;
+        max-width: 400px;
+        padding: 15px 15px 15px 160px;
+        margin: 2rem 0;
+        overflow: hidden;
+        font-size: 13px;
+        line-height: 1.4;
+        text-align: left;
+        background-color: rgba(0, 0, 0, .05);
+    }
+}
+
+.wet-asphalt {
+    color: #3A383A;
+    padding-top: 20px;
+    background-color: #00CB44;
+    /*background-image: url(./assets/img/fondoblue.png);*/
+    background-repeat: repeat-x;
+}
+
+.wet-asphalt a {
+    color: white;
+    padding: 10px;
+}
+
+

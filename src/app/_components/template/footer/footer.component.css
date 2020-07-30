@@ -1,0 +1,40 @@
+@charset "UTF-8";
+footer {
+    width: 100% !important;
+}
+
+#email {
+    padding-left: 10px;
+    text-align: left;
+    border: 1px solid white !important;
+    color: #3A383A;
+    background-color: #FFFFFF;
+    margin-top: -10px !important;
+}
+
+#btnRegistrarContactoBoletin {
+    margin-top: -19px !important;
+}
+
+.violeta-footer {
+    background-color: #BB33FF !important;
+    color: white !important;
+    margin-bottom: -20px;
+    padding: 10px;
+}
+
+.violeta-footer .textH4 {
+    color: white !important;
+    font-size: 2.5rem;
+    font-weight: bolder;
+}
+
+.violeta-footer .textSpan {
+    color: white !important;
+    font-size: 1.2rem;
+    font-weight: lighter;
+}
+
+.btn-info {
+    border-color: white !important;
+}

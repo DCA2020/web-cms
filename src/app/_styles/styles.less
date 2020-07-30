@@ -8,7 +8,7 @@
 
         .jumbotron {
             margin: 5% 5%;
-            background-color: aliceblue;
+            background-color: white;
             width: 95%;
         }
 
@@ -68,7 +68,7 @@
     @media (min-width: 370px) {
         .jumbotron {
             margin: 10px 10px;
-            background-color: aliceblue;
+            background-color: white;
             //width: 100%;
         }
 
@@ -98,6 +98,17 @@
             color: dimgray;
         }
 
+        form.loginForm {
+            width: 100% !important;
+        }
+
+        .form-group {
+            margin-top: -10px;
+            margin-bottom: -10px;
+            margin: 0px;
+            padding: 0px;
+        }
+
         .form-control {
             width: 100%;
         }
@@ -108,9 +119,9 @@
     }
     @media (min-width: 1023px) {
         .jumbotron {
-            margin: 10px auto !important;
-            background-color: aliceblue;
-            width: 100%;
+            margin: -10px auto !important;
+            background-color: white;
+            width: 100% !important;
         }
 
         #logo {
@@ -119,6 +130,7 @@
 
         h2 {
             font-size: 2.0rem;
+            text-align: center;
         }
 
         h1 {
@@ -137,8 +149,20 @@
         }
 
         .container {
-            width: 100%;
+            width: 100% !important;
             color: dimgray;
+        }
+
+        form.loginForm {
+            width: 100% !important;
+            margin: 0px auto !important;
+        }
+
+        .form-group {
+            margin-top: -10px;
+            margin-bottom: -10px;
+            margin: 0px;
+            padding: 0px;
         }
 
         .form-control {
@@ -148,9 +172,9 @@
 }
 
 footer {
-    width: 100%;
+    width: 100% !important;
     @media screen and (min-width: 1023px) {
-        width: 768px;
+        width: 100% !important;
     }
 }
 
@@ -168,7 +192,7 @@ footer {
 
 @media @desktop {
     footer {
-        width: 940px;
+        width: 100% !important;
     }
 }
 

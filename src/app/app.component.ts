@@ -2,10 +2,11 @@
 import {ActivatedRoute, Router} from '@angular/router';
 import {AuthenticationService} from './_services';
 import './_styles/styles.less';
+
 import {UserModel} from "@/_models";
 
 @Component({
-    selector: 'app-service',
+    selector: 'app-index',
     templateUrl: './app.component.html'
 })
 export class AppServiceComponent implements OnInit {
@@ -18,11 +19,11 @@ export class AppServiceComponent implements OnInit {
         private route: ActivatedRoute,
         private authenticationService: AuthenticationService
     ) {
-        this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
+        /*this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
         // redirect to home if already logged in
-        if (this.authenticationService.currentUserValue) {
+        if (this.authenticationService.currentUserValue) {*/
             this.router.navigate(['/']);
-        }
+        /*}*/
     }
 
     ngOnInit() {

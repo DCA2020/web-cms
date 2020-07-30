@@ -150,18 +150,15 @@
         <span fxShow.sm="true" fxShow.gt-md="true" fxShow="false"> Nueva Noticia</span>
     </button>
     <h1>{{'principal.noticias.titulo_panel' | translate}}</h1>
-    <toast-global></toast-global>
+    <!--<toast-global></toast-global>-->
     <div class="container" id="tablaNoticias" *ngIf="!creandoNuevo">
         <div class="container-fluid" style="margin-top: 10px">
             <div class="table-row wrapper header" fxShow.sm="true" fxShow.gt-md="true" fxShow="false">
                 <div class="wrapper text-4">
                     <div class="wrapper text-2">
                         <div class="text" style="width: 20% !important;">Titulo</div>
-                        <div class="text" style="width: 40% !important;">Resumen</div>
-                        <div class="text" style="width: 10% !important;">Eliminar</div>
-                        <div class="text" style="width: 10% !important;">Visualizar</div>
-                        <div class="text" style="width: 12% !important;">Editar</div>
-                        <div class="text" style="width: 8% !important;">PDF</div>
+                        <div class="text" style="width: 60% !important;">Resumen</div>
+                        <div class="text" style="width: 20% !important;">Acciones</div>
                     </div>
                 </div>
             </div>
@@ -179,7 +176,7 @@
                         </div>
 
                         <div class="text" fxShow.sm="true" fxShow.gt-md="true" fxShow="false"
-                             style="width: 40% !important;" title="{{noticia.resumen}}">
+                             style="width: 60% !important;" title="{{noticia.resumen}}">
                             {{noticia.resumen}}
                         </div>
 
@@ -187,47 +184,44 @@
                             <span>Resumen: </span>{{noticia.resumen}}
                         </div>
 
-                        <div class="text" style="width: 10% !important;" fxShow.sm="true" fxShow.gt-md="true"
-                             fxShow="false">
-                            <a (click)="open(mymodal, noticia)" class="btn btn-danger text-white" placement="top"
-                               ngbTooltip="Clic para eliminar esta noticia">
-                                <em class="fa fa-remove"></em>
-                                <span> Eliminar</span>
-                            </a>
-                        </div>
-
-                        <div class="text" style="width: 12% !important;" fxShow.sm="true" fxShow.gt-md="true"
+                        <div class="text" style="width: 5% !important;" fxShow.sm="true" fxShow.gt-md="true"
                              fxShow="false">
                             <a (click)="irAlDetalle(noticia)" class="btn btn-info text-white" placement="top"
                                ngbTooltip="Click para descargar pdf del contenido de la noticia.">
                                 <em class="fa fa-desktop"></em>
-                                <span> Visualizar</span>
+                                <!--<span> Visualizar</span>-->
                             </a>
                         </div>
 
-                        <div class="text" style="width: 10% !important;" fxShow.sm="true" fxShow.gt-md="true"
+                        <div class="text" style="width: 5% !important;" fxShow.sm="true" fxShow.gt-md="true"
                              fxShow="false">
                             <a (click)="irAEdicion(noticia)" class="btn btn-success text-white" placement="top"
                                ngbTooltip="Clic para Editar esta noticia">
                                 <em class="fa fa-edit"></em>
-                                <span> Editar</span>
+                                <!--<span> Editar</span>-->
                             </a>
                         </div>
 
-                        <div class="text" style="width: 8% !important;" fxShow.sm="true" fxShow.gt-md="true"
+                        <div class="text" style="width: 5% !important;" fxShow.sm="true" fxShow.gt-md="true"
                              fxShow="false">
-                            <a (click)="exportAsPDF('tablaNoticias');" class="btn btn-danger text-white" placement="top"
+                            <a (click)="exportAsPDF('noticeDetail', noticia);" class="btn btn-danger text-white"
+                               placement="top"
                                ngbTooltip="Click para descargar pdf del contenido de la noticia.">
                                 <em class="fa fa-file-pdf-o"></em>
-                                <span> PDF</span>
+                                <!--<span> PDF</span>-->
+                            </a>
+                        </div>
+
+                        <div class="text" style="width: 5% !important;" fxShow.sm="true" fxShow.gt-md="true"
+                             fxShow="false">
+                            <a (click)="open(mymodal, noticia)" class="btn btn-danger text-white" placement="top"
+                               ngbTooltip="Clic para eliminar esta noticia">
+                                <em class="fa fa-remove"></em>
+                                <!--<span> Eliminar</span>-->
                             </a>
                         </div>
 
                         <div class="text" fxShow.sm="false" fxShow.gt-md="false" fxShow="true">
-                            <a (click)="open(mymodal, noticia)" class="btn btn-danger text-white">
-                                <em class="fa fa-remove"></em>
-                            </a>
-
                             <a (click)="irAlDetalle(noticia)" class="btn btn-success text-white">
                                 <em class="fa fa-edit"></em>
                             </a>
@@ -236,8 +230,11 @@
                                 <em class="fa fa-desktop"></em>
                             </a>
 
-                            <a (click)="exportAsPDF('tablaNoticias');" class="btn btn-danger text-white">
+                            <a (click)="exportAsPDF('tablaNoticias', noticia);" class="btn btn-danger text-white">
                                 <em class="fa fa-file-pdf-o"></em>
+                            </a>
+                            <a (click)="open(mymodal, noticia)" class="btn btn-danger text-white">
+                                <em class="fa fa-remove"></em>
                             </a>
                         </div>
 
@@ -295,3 +292,5 @@
     </div>
 
 </div>
+
+<app-notice-detail *ngIf="creandoPDF"></app-notice-detail>

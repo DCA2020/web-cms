@@ -37,7 +37,6 @@
         "@ngx-translate/http-loader": "^4.0.0",
         "@reactivex/rxjs": "^6.5.3",
         "@syncfusion/ej2-angular-richtexteditor": "^18.1.43",
-        "@types/jquery": "^3.3.35",
         "@types/ol": "^6.2.0",
         "@types/socket.io-client": "^1.4.32",
         "@types/underscore": "^1.9.3",
@@ -52,6 +51,7 @@
         "rxjs": "^6.3.3",
         "rxjs-compat": "^6.5.3",
         "underscore": "^1.9.1",
+        "utf8-encoding": "^0.1.2",
         "zone.js": "^0.9.1"
     },
     "devDependencies": {

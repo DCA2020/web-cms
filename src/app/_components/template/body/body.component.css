@@ -1,0 +1,9 @@
+.body {
+    width: 90%;
+    margin: 0px auto !important;
+}
+picture > img {
+    border: 5px solid #e0e0e0 !important;
+    padding: 2px !important;
+    margin: 0px auto !important;
+}

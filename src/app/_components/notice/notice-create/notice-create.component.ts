@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {RichTextEditorComponent} from "@syncfusion/ej2-angular-richtexteditor";
 import {NoticeCategoryModel, NoticeModel, NoticeStateModel} from "@/_models";
 import {Log} from "@/_utils";
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AlertService, NoticeCategoryService, NoticeService} from "@/_services";
 import {TranslateService} from "@ngx-translate/core";
@@ -58,13 +58,15 @@ export class NoticeCreateComponent implements OnInit {
     model: NoticeModel;
     noticia: any;
     enEdicion: string = 'false';
+    registroFormulario: FormGroup;
 
     noticeState = new NoticeStateModel(1, '1', 'Aprobado', '', true, '');
     noticeCategory = new NoticeCategoryModel(1, '5e932f70edc85840601546c5', 'Noticias', '', true, '');
     persona = new PersonModel(1, '1', 'YSUAREZ', '', true, '6803296');
     //public value: string = null;
 
-    constructor(private rutaActiva: ActivatedRoute,
+    constructor(private formBuilder: FormBuilder,
+                private rutaActiva: ActivatedRoute,
                 private modalService: NgbModal,
                 public noticeCategoryService: NoticeCategoryService,
                 public noticeService: NoticeService,
@@ -77,6 +79,12 @@ export class NoticeCreateComponent implements OnInit {
     ) {
         this.translate.setDefaultLang(this.activeLang);
         this.loadingFull = true;
+        /*this.registroFormulario = this.formBuilder.group({
+            tipoDocumento: ['', Validators.required],
+            numeroDocumento: ['', [Validators.required, Validators.pattern('^[a-zA-ZÒ—·ÈÌÛ˙¡…Õ”⁄0-9\\-\\.\\_\\/]+$')]],
+            cantidadUnidades: [''],
+            valor: ['', Validators.required]
+        });*/
     }
 
     ngOnInit(): void {

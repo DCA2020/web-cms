@@ -1,0 +1,31 @@
+.red-icon {
+    color: #de3231;
+}
+
+svg.red-icon {
+    fill: #de3231;
+}
+
+.white-icon {
+    color: #FFFFFF;
+}
+
+svg.white-icon {
+    fill: #FFFFFF;
+}
+
+a.nav-link {
+    color: #F4F4F4 !important;
+    font-size: 1.2rem;
+}
+
+.reloj {
+    margin-top:-10px;
+    margin-bottom:-10px;
+    font-size: 1.1rem;
+}
+.user {
+    margin-top:-15px;
+    margin-bottom:-10px;
+    font-size: 1.3rem;
+}

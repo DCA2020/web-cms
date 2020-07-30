@@ -1,0 +1,192 @@
+<!-- #region ENLACES EXTERNOS -->
+
+<div id="tabs" #tabs>
+    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist"
+        style="width: 80% !important; margin: 0px auto !important;">
+        <li class="nav-item">
+            <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-tab"
+               [ngClass]="{ 'active':activeTab==='pills-home'}" (click)="search('pills-home')"
+               role="tab" aria-controls="pills-home" aria-selected="true">Comunidad en l&iacute;nea</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-tab"
+               [ngClass]="{ 'active':activeTab==='pills-profile'}" data-toggle="tab" (click)="result('pills-profile')"
+               role="tab" aria-controls="pills-profile" aria-selected="false">Noticias</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-tab"
+               [ngClass]="{ 'active':activeTab==='pills-contact'}" data-toggle="tab" (click)="result('pills-contact')"
+               role="tab" aria-controls="pills-contact" aria-selected="false">Novedades</a>
+        </li>
+    </ul>
+    <div class="tab-content" id="pills-tabContent" style="width: 80% !important; margin: 0px auto !important;">
+        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
+             [ngClass]="{ 'active':activeTab==='pills-home'}">
+            <section>
+                <nav class='enlacesIconos'>
+                    <div class="row">
+                        <div class="column" placement="top"
+                             ngbTooltip="Durante el 2017,el Movimiento Nacional CIMARR&Oacute;N continu&oacute; desarrollando los programas y proyectos del Plan Estrat&eacute;gico 2015-2025, dando cumplimiento a la Visi&oacute;n, Misi&oacute;n, Principios y Objetivos...">
+                            <a class="mytooltip"
+                               href="http://centroautoreconocimientoafro.blogspot.com/p/microasociacion.html"
+                               target="_blank">
+                                <img src="../../../../../assets/img/slider/cenafro.jpg" alt="Snow" style="width:100%">
+                                <span class="tooltip-content5">
+                            <span class="tooltip-text3">
+                                <span class="tooltip-inner2">CENAFRO<br>
+                                    <span style="font-size:0.8rem; margin-bottom: 11px;">http://cent...afro.blogspot.com/</span>
+                                </span>
+                            </span>
+                        </span>
+                            </a>
+                        </div>
+                        <div class="column" placement="top"
+                             ngbTooltip="La idea de la iniciativa de Microasociaci&oacute;n Productiva, es promover un grito de independencia econ&oacute;mica, abriendo la puerta a asociarnos como un solo pueblo negro descendiente de esclavos, creando ...">
+                            <a class="mytooltip" href="http://movimientocimarron.org/" target="_blank">
+                                <img src="../../../../../assets/img/slider/cimarron.jpg" alt="Snow" style="width:100%">
+                                <span class="tooltip-content5">
+                            <span class="tooltip-text3">
+                                <span class="tooltip-inner2">CIMARRON<br> <span
+                                    style="font-size:0.8rem; margin-bottom: 11px;">http://movimientocimarron.org/</span>
+                                </span>
+                            </span>
+                        </span>
+                            </a>
+                        </div>
+                        <div class="column" placement="top"
+                             ngbTooltip="">
+                            <a class="mytooltip" href="https://www.revistaviveafro.com/" target="_blank">
+                                <img src="../../../../../assets/img/slider/revistaviveafro.png" alt="Snow"
+                                     style="width:100%; background: #0A8547;">
+                                <span class="tooltip-content5">
+                            <span class="tooltip-text3">
+                                <span class="tooltip-inner2">REVISTA VIVE AFRO<br> <span
+                                    style="font-size:0.8rem; margin-bottom: 11px;">https://www.revistaviveafro.com/</span>
+                                </span>
+                            </span>
+                        </span>
+                            </a>
+                        </div>
+                        <div class="column" placement="top"
+                             ngbTooltip="Direcci&oacute;n de asuntos para las comunidades negras afrocolombianas, raizales y palenqueras.">
+                            <a class="mytooltip" href="https://dacn.mininterior.gov.co" target="_blank">
+                                <img src="../../../../../assets/img/slider/dacn.jpg" alt="Snow" style="width:100%">
+                                <span class="tooltip-content5">
+                            <span class="tooltip-text3">
+                                <span class="tooltip-inner2">DANC<br> <span
+                                    style="font-size:0.8rem; margin-bottom: 11px;">https://dacn.mininterior.gov.co</span>
+                                </span>
+                            </span>
+                        </span>
+                            </a>
+                        </div>
+                        <div class="column" placement="top"
+                             ngbTooltip="Comunidades
+                                        afrocolombianas o negras. La poblaci&oacute;n de comunidades negras cuenta con
+                                        Consejos Comunitarios, como una forma de administraci&oacute;n interna que crea cada
+                                        comunidad negra para recibir en propiedad colectiva las tierras adjudicables o
+                                        tierras bald&iacute;as de las zonas rurales ribereñas de los r&iacute;os de la Cuenca del
+                                        Pac&iacute;fico y ...">
+                            <a class="mytooltip"
+                               href="https://www.minsalud.gov.co/proteccionsocial/promocion-social/Paginas/Comunidades-grupos-etnicos.aspx"
+                               target="_blank">
+                                <img src="../../../../../assets/img/slider/minsaludgruposetnicos.jpg" alt="Snow"
+                                     style="width:100%">
+                                <span class="tooltip-content5">
+                            <span class="tooltip-text3">
+                                <span class="tooltip-inner2">MIN. SALUD COMUNIDADES AFRO<br> <span
+                                    style="font-size:0.8rem; margin-bottom: 11px;">https://renacientes.net/</span>
+                                </span>
+                            </span>
+                        </span>
+                            </a>
+                        </div>
+                        <div class="column" placement="top"
+                             ngbTooltip=" Proceso de Comunidades Negras de Colombia">
+                            <a class="mytooltip"
+                               href="https://portal.icetex.gov.co/Portal/Home/HomeEstudiante/fondos-en-administracion-Listado/fondo-comunidades-negras"
+                               target="_blank">
+                                <img src="../../../../../assets/img/slider/icetexcomunidadesnegras.jpg" alt="Snow"
+                                     style="width:100%">
+                                <span class="tooltip-content5">
+                            <span class="tooltip-text3">
+                                <span class="tooltip-inner2">ICETEX COMUNIDADES NEGRAS<br> <span
+                                    style="font-size:0.8rem; margin-bottom: 11px;">https://portal.icetex.gov.co</span>
+                                </span>
+                            </span>
+                        </span>
+                            </a>
+                        </div>
+                        <div class="column" placement="top"
+                             ngbTooltip="">
+                            <a class="mytooltip"
+                               href="http://www.mincultura.gov.co/areas/poblaciones/comunidades-negras-afrocolombianas-raizales-y-palenqueras/Paginas/default.aspx"
+                               target="_blank">
+                                <img src="../../../../../assets/img/slider/mincultura.jpg" alt="Snow"
+                                     style="width:100%">
+                                <span class="tooltip-content5">
+                            <span class="tooltip-text3">
+                                <span class="tooltip-inner2">MIN. CULTURA<br> <span
+                                    style="font-size:0.8rem; margin-bottom: 11px;">http://www.mincultura.gov.co</span>
+                                </span>
+                            </span>
+                        </span>
+                            </a>
+                        </div>
+                        <div class="column" placement="top"
+                             ngbTooltip="Conferencia nacional de organizaciones afrocolombianas!">
+                            <a class="mytooltip" href="https://convergenciacnoa.org/" target="_blank">
+                                <img src="../../../../../assets/img/slider/cnoa.jpg" alt="Snow" style="width:100%">
+                                <span class="tooltip-content5">
+                            <span class="tooltip-text3">
+                                <span class="tooltip-inner2">CNOA<br> <span
+                                    style="font-size:0.8rem; margin-bottom: 11px;">https://convergenciacnoa.org/</span>
+                                </span>
+                            </span>
+                        </span>
+                            </a>
+                        </div>
+                        <div class="column" placement="top"
+                             ngbTooltip=" Proceso de Comunidades Negras de Colombia">
+                            <a class="mytooltip" href="https://renacientes.net/" target="_blank">
+                                <img src="../../../../../assets/img/slider/renacientes.jpg" alt="Snow"
+                                     style="width:100%">
+                                <span class="tooltip-content5">
+                            <span class="tooltip-text3">
+                                <span class="tooltip-inner2">RENACIENTES<br> <span
+                                    style="font-size:0.8rem; margin-bottom: 11px;">https://renacientes.net/</span>
+                                </span>
+                            </span>
+                        </span>
+                            </a>
+                        </div>
+                        <div class="column" placement="top"
+                             ngbTooltip="Asociaci&oacute;n nacional de afrocolombianos desplazados!">
+                            <a class="mytooltip" href="http://www.afrodescolombia.org/" target="_blank">
+                                <img src="../../../../../assets/img/slider/afrodes.jpg" alt="Snow" style="width:100%">
+                                <span class="tooltip-content5">
+                        <span class="tooltip-text3">
+                            <span class="tooltip-inner2">AFRODES<br>
+                                <span
+                                    style='font-size:0.8rem; margin-bottom: 11px;'>http://www.afrodescolombia.org/</span>
+                            </span>
+                        </span>
+                    </span>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </section>
+        </div>
+        <div class="tab-pane" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab"
+             [ngClass]="{ 'active':activeTab==='pills-profile'}">
+            <app-notice></app-notice>
+        </div>
+        <div class="tab-pane" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab"
+             [ngClass]="{ 'active':activeTab==='pills-contact'}">
+            <app-article></app-article>
+        </div>
+    </div>
+</div>
+
+<!-- #endregion -->

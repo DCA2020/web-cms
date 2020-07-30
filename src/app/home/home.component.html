@@ -1,4 +1,13 @@
-﻿<div class="container">
+﻿<!-- nav-->
+<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
+    <div class="navbar-nav">
+        <a class="nav-item nav-link" routerLink="notices">Noticias</a>
+        <a class="nav-item nav-link" routerLink="articles">Articulos</a>
+        <a class="nav-item nav-link" routerLink="contents">Contenidos</a>
+    </div>
+</nav>
+
+<div class="container">
     <div class="flex-container" fxLayout="column">
         <div class="card-columns">
             <div class="card bg-primary" routerLink="notices" style="cursor: pointer;">
@@ -33,4 +42,23 @@
         </ngb-alert>
 
     </div>
+</div>
+
+<!-- main app container-->
+<div class="jumbotron">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 offset-sm-0">
+                <alert></alert>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- credits-->
+<div class="text-center jumbotron">
+    <p>
+        <a href="#" routerLink="/" target="_parent">Modulo de contenidos</a>
+    </p>
 </div>

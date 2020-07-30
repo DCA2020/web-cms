@@ -57,8 +57,7 @@ export class ArticleComponent implements OnInit {
         this.rteEle.element.focus();
     }
 
-    onSubmit(form: NgForm): void {
-        alert(form.value);
+    onSubmit(): void {
         this.submitted = true;
     }
 }

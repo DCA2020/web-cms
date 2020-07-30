@@ -1,0 +1,53 @@
+
+/* Three image containers (use 25% for four, and 50% for two, etc) */
+nav.enlacesIconos {
+    width: 100%;
+    margin: 5px auto 5px auto !important;
+}
+
+.column {
+    float: left;
+    width: 10%;
+    padding: 5px;
+}
+
+.column > a > img {
+    vertical-align: middle !important;
+    border: 2px solid #00CB44;
+    padding: 3px;
+    z-index: 1;
+}
+
+/* Clear floats after image containers */
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.tooltip-inner2{
+    font-weight: bolder;
+    font-size: 1.0rem !important;
+    text-align: center !important;
+}
+.tooltip-inner2 > span{
+    font-weight: lighter !important;
+    font-size: 0.8rem !important;
+    visibility: hidden;
+}
+
+/*
+rating
+*/
+
+.animated {
+    -webkit-transition: height 0.2s;
+    -moz-transition: height 0.2s;
+    transition: height 0.2s;
+}
+
+.stars {
+    margin: 20px 0;
+    font-size: 24px;
+    color: #d17581;
+}

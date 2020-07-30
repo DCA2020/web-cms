@@ -1,5 +1,24 @@
 {
     "principal": {
+        "inicioDeSesion": "INICIO DE SESI\u00D3N",
+        "login": {
+            "label_usuario": "Usuario",
+            "label_usuarioerror": "El usuario es requerido!",
+            "label_password": "Contrase\u00F1a",
+            "label_passworderror": "La contrase\u00F1a es requerida!",
+            "btn_iniciarSesion": "Iniciar Sesi\u00F3n",
+            "btn_registrarse": "Registrarse"
+        },
+        "register": {
+            "label_usuario": "Usuario",
+            "label_email": "Correo Electr\u00F3nico",
+            "label_primerNombre": "Primer Nombre",
+            "label_segundoNombre": "Segundo Nombre",
+            "label_primerApellido": "Primer Apellido",
+            "label_segundoApellido": "Segundo Apellido",
+            "btn_registrar": "Registrar",
+            "btn_cancelarRegistrar": "Cancelar registro!"
+        },
         "bienvenida": "Administrador de contenidos!",
         "titulo": "CMS",
         "noticias": {

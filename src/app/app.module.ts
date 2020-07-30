@@ -37,11 +37,25 @@ import {PaginationComponent} from "@/_directives/pagination/pagination.component
 import {DragDropFileUploadDirective} from './_directives/drag-drop-file-upload.directive';
 import {NoticeDetailComponent} from './_components/notice/notice-detail/notice-detail.component';
 import {NoticeCreateComponent} from './_components/notice/notice-create/notice-create.component';
-
-;
-import {ToastGlobalComponent} from './_directives/toast/toast-global/toast-global.component'
-    ;
-import {ToastsContainersComponent} from './_directives/toast/toasts-containers/toasts-containers.component'
+import {ToastGlobalComponent} from './_directives/toast/toast-global/toast-global.component';
+import {ToastsContainersComponent} from './_directives/toast/toasts-containers/toasts-containers.component';
+import {TemplateComponent} from './_components/template/template.component';
+import {HeaderComponent} from './_components/template/header/header.component';
+import {FooterComponent} from './_components/template/footer/footer.component';
+import {BodyComponent} from './_components/template/body/body.component';
+import {CopyrightComponent} from './_components/template/footer/copyright/copyright.component';
+import {AboutUsComponent} from './_components/template/body/about-us/about-us.component';
+import {ServiceComponent} from './_components/template/body/service/service.component';
+import {ContactComponent} from './_components/template/body/contact/contact.component';
+import {TestimonialComponent} from './_components/template/body/testimonial/testimonial.component';
+import {LinkExternalComponent} from './_components/template/body/link-external/link-external.component';
+import {LinkComponent} from './_components/template/body/link/link.component';
+import {LinkLeftComponent} from './_components/template/body/link-left/link-left.component';
+import {InstagramComponent} from './_components/template/content/instagram/instagram.component';
+import {ContentComponent} from './_components/template/content/content.component';
+import {LoginComponent} from './_components/login/login.component';
+import {RegisterCommunityComponent} from './_components/register-community/register-community.component';
+import {LinkRightComponent} from "@/_components/template/body/link-right/link-right.component";
 
 export function createTranslateLoader(http: HttpClient) {
     return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
@@ -94,7 +108,24 @@ const EXTRA_BREAKPOINTS = [{
         NoticeDetailComponent,
         NoticeCreateComponent,
         ToastsContainersComponent,
-        ToastGlobalComponent],
+        ToastGlobalComponent,
+        TemplateComponent,
+        FooterComponent,
+        HeaderComponent,
+        BodyComponent,
+        CopyrightComponent,
+        AboutUsComponent,
+        ServiceComponent,
+        ContactComponent,
+        TestimonialComponent,
+        LinkExternalComponent,
+        LinkComponent,
+        LinkLeftComponent,
+        LinkRightComponent,
+        InstagramComponent,
+        ContentComponent,
+        LoginComponent,
+        RegisterCommunityComponent],
     exports: [PaginationComponent],
     providers:
         [

@@ -39,13 +39,13 @@
 
             </form>-->
 
-            <form (ngSubmit)="onSubmit()" #noticeForm="ngForm" id="noticeForm">
+            <form (ngSubmit)="onSubmit()" [formGroup]="registroFormulario" #noticeForm="ngForm" id="noticeForm">
                 <div class="flex-container" fxLayout="column">
                     <div class="card-text">
                         <div class="form-group">
                             <label for="titulo">Titulo</label>
                             <input type="text" class="form-control" id="titulo" required [(ngModel)]="model.titulo"
-                                   name="titulo" #titulo="ngModel">
+                                   name="titulo" #titulo="ngModel" >
                             <div [hidden]="titulo.valid || titulo.pristine" class="alert alert-danger">
                                 El titulo es requerido
                             </div>

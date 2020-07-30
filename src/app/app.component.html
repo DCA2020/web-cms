@@ -1,28 +1,10 @@
-﻿<!-- nav-->
-<nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="currentUser">
-    <div class="navbar-nav">
-        <a class="nav-item nav-link" routerLink="notices">Noticias</a>
-        <a class="nav-item nav-link" routerLink="articles">Articulos</a>
-        <a class="nav-item nav-link" routerLink="contents">Contenidos</a>
-    </div>
-</nav>
-
-<!-- main app container-->
-<div class="jumbotron">
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-12 offset-sm-0">
-                <alert></alert>
-                <router-outlet></router-outlet>
+﻿<div class="jumbotron" style="width: 100% !important; padding: 0px !important;margin-top: -20px !important;">
+    <div style="width: 100% !important; padding: 0px !important;margin-top: -20px !important;">
+        <div style="width: 100% !important; padding: 0px !important; margin-top: -20px !important;">
+            <div style="width: 100% !important; padding: 0px !important; margin-top: -20px !important;">
+                <app-template style="width: 100% !important; margin-top: -20px !important;"></app-template>
             </div>
         </div>
     </div>
-</div>
-
-<!-- credits-->
-<div class="text-center jumbotron">
-    <p>
-        <a href="#" routerLink="/" target="_parent">Modulo de contenidos</a>
-    </p>
 </div>
 

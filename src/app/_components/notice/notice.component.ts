@@ -45,6 +45,7 @@ export class NoticeComponent implements OnInit {
     title = 'appBootstrap';
     closeResult: string;
     creandoNuevo = false;
+    creandoPDF = false;
     actualizando = false;
     //#region PAGINACION
     public config: any;
@@ -94,7 +95,7 @@ export class NoticeComponent implements OnInit {
     }
 
     irAlDetalle(noticia_: NoticeModel): void {
-        this.router.navigate(['/app-notice-detail', {enEdicion: 'false'} ]);
+        this.router.navigate(['/app-notice-detail', {enEdicion: 'false'}]);
     }
 
     irAEdicion(noticia_: NoticeModel): void {
@@ -107,7 +108,8 @@ export class NoticeComponent implements OnInit {
         this.config.currentPage = event;
     }
 
-    exportAsPDF(MyDIv) {
+    exportAsPDF(MyDIv, noticeModel: NoticeModel) {
+        this.creandoPDF = true;
         let data = document.getElementById(MyDIv);
         html2canvas(data).then(canvas => {
             const contentDataURL = canvas.toDataURL('image/png')
@@ -117,7 +119,6 @@ export class NoticeComponent implements OnInit {
             pdf.save('Filename.pdf');
         });
     }
-
 
 
     // Clean Url

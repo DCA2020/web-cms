@@ -5,6 +5,7 @@ var SRC = path.resolve(__dirname, 'src/app');
 
 module.exports = {
     entry: './src/main.ts',
+    devtool: 'eval-source-map',
     output: {
         path: path.resolve(__dirname, 'build'),
         filename: '[name].js',
@@ -43,18 +44,27 @@ module.exports = {
                 parser: {system: true}
             },
             {
-                test: /\.(gif|png|jpe?g|svg)$/i, ///\.(eot|gif|otf|png|svg|ttf|woff)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+                test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2|json|xml|ico)$/i, ///\.(eot|gif|otf|png|svg|ttf|woff)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
                 //include: SRC,
                 use: ['file-loader',
                     {
                         loader: 'image-webpack-loader',
                         options: {
                             bypassOnDebug: true, // webpack@1.x
-                            disable: true, // webpack@2.x and newer
+                            disable: false, // webpack@2.x and newer
+                            name: '[path][name].[ext]',
                         },
                     }
                 ]
-            }
+            }/*
+            {
+                test: /\.(png|jpe?g|gif|svg|eot|ttf|woff|woff2|json|xml|ico)$/i,
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[ext]',
+                },
+            }*/
+
         ]
     },
     plugins: [
